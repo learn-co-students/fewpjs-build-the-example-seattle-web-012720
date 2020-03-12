@@ -4,8 +4,25 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
-
-
+const liArray = document.getElementsByClassName("like")
+for (var i = 0; i < liArray.length; i++) {
+  const li = liArray[i]
+  li.addEventListener("click", function(event){
+    mimicServerCall()
+    .then(function(response){
+      if(li.className == "like"){
+        li.className = "activated-heart"
+      }else{
+        li.className = "like"
+      }
+    })
+    .catch(function(error){
+      const errorDiv = document.getElementById("modal")
+      errorDiv.classList.remove("hidden")
+      setTimeout(function() {errorDiv.className = "hidden"}, 5000)
+    })
+  })
+}
 
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
