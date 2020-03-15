@@ -4,7 +4,29 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+const selectHeart = document.querySelector(".like-glyph");
+const errorMessage = document.getElementById("modal")
 
+selectHeart.addEventListener("click", function(e){
+  
+  mimicServerCall() 
+
+  .then(function(result){
+    if (selectHeart.innerText == EMPTY_HEART){
+    selectHeart.innerText = FULL_HEART;
+    selectHeart.className = 'activated-heart';
+    }
+    else {
+      selectHeart.innerText = EMPTY_HEART;
+    }
+  })
+  .catch(function(error){
+    errorMessage.classList.remove('hidden') 
+    setTimeout(function() {
+      modal.classList.add('hidden');
+    }, 500);
+  })
+})
 
 
 //------------------------------------------------------------------------------
@@ -23,3 +45,5 @@ function mimicServerCall(url="http://mimicServer.example.com", config={}) {
     }, 300);
   });
 }
+
+
