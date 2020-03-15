@@ -3,8 +3,29 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+const error = document.getElementById("modal")
+const likes = document.getElementsByClassName('like')
 
-
+for (const like of likes) {
+  like.addEventListener('click', () => {
+    mimicServerCall().then( () => {
+      const heart = like.children[0];
+      if (heart.innerText == EMPTY_HEART) {
+        heart.innerText = FULL_HEART;
+        heart.className = 'activated-heart';
+      } else {
+        heart.innerText = EMPTY_HEART;
+        heart.className = '';
+      }
+    })
+    .catch(message => {
+      error.className = "";
+      error.innerText = message;
+      setTimeout(function(){ 
+        error.className = "hidden"; }, 5000);
+    })
+  })
+};
 
 
 //------------------------------------------------------------------------------
